@@ -22,6 +22,12 @@ def process(nodes: List[List[node]], flattened_nodes: List[node], cutoff: int):
         else:
             print(sum_right)
         return
+    if cutoff == 0:
+        sum_all = 0
+        for i in range(max_rows):
+            sum_all = sum_all + nodes[i][0].info + nodes[i][1].info
+        print(sum_all)
+        return
     
     max_sum = 0
     flattened_nodes.sort(key=sorter)
@@ -49,7 +55,8 @@ def process(nodes: List[List[node]], flattened_nodes: List[node], cutoff: int):
                     nodes[curr_x+1][(curr_y+1)%2].state = 2
             if cutoff == count:
                 break
-      
+        if count < cutoff:
+            continue
         sum = 0
         for i in range(len(flattened_nodes)):
             x = flattened_nodes[i].i
